@@ -1,0 +1,93 @@
+package testcase;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class firstTest {
+
+    public static void main(String[] args) {
+        Properties prop = new Properties();
+        WebDriver driver = null;
+        
+        try {
+            // Load properties from config file
+            FileInputStream fileInput = new FileInputStream("config.properties");
+            prop.load(fileInput);
+
+            // Get the browser and test URL from the properties file
+            String browser = prop.getProperty("browser");
+            String testUrl = prop.getProperty("testurl");
+
+            // Set up WebDriver based on the browser specified in the config
+            if (browser.equalsIgnoreCase("chrome")) {
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+            } else if (browser.equalsIgnoreCase("firefox")) {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+            } else {
+                System.out.println("Browser not supported!");
+                return;
+            }
+
+            // Open the specified URL
+            driver.get(testUrl);
+
+            // Click on the Sign in button
+            WebElement signInButton = driver.findElement(By.linkText("Sign in"));
+            signInButton.click();
+
+            // Wait for the sign-in page to load
+            Thread.sleep(2000);
+
+            // Enter email address or mobile number
+            WebElement emailField = driver.findElement(By.id("login_id"));
+            emailField.sendKeys("rushi.goggle@gmail.com");
+
+            // Click on the Next button
+            WebElement nextButton = driver.findElement(By.id("nextbtn"));
+            nextButton.click();
+
+            // Wait for the password field to load
+            Thread.sleep(2000);
+
+            // Enter password
+            WebElement passwordField = driver.findElement(By.id("password"));
+            passwordField.sendKeys("Pass@2524");
+
+            // Click on the Sign in button
+            WebElement submitButton = driver.findElement(By.id("nextbtn"));
+            submitButton.click();
+
+            // Wait for sign-in to complete
+            Thread.sleep(5000);
+
+            // Verify the sign-in by checking if a certain element is present after login
+            boolean isLoginSuccessful = driver.findElement(By.id("element-after-login")) != null;
+
+            if (isLoginSuccessful) {
+                System.out.println("Sign-in was successful!");
+            } else {
+                System.out.println("Sign-in failed.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (driver != null) {
+                // Close the browser
+                driver.quit();
+            }
+        }
+    }
+}

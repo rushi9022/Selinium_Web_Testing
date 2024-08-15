@@ -1,25 +1,23 @@
 package testcase;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import base.BaseTest;
 
-public class firstTest {
+public class firstTest extends BaseTest {
 
-    public static void main(String[] args) {
-        // Set the path of the ChromeDriver executable
-
-    	WebDriverManager.chromedriver().setup();
-
-        // Initialize WebDriver
-        WebDriver driver = new ChromeDriver();
-
+    @Test
+    
+    public void testZohoSignIn() {
         try {
-            // Open Zoho.com
-            driver.get("https://www.zoho.com");
+            // Get the test URL from the properties file
+            String testUrl = prop.getProperty("testurl");
+
+            // Open the specified URL
+            driver.get(testUrl);
 
             // Click on the Sign in button
             WebElement signInButton = driver.findElement(By.linkText("Sign in"));
@@ -53,16 +51,11 @@ public class firstTest {
             // Verify the sign-in by checking if a certain element is present after login
             boolean isLoginSuccessful = driver.findElement(By.id("element-after-login")) != null;
 
-            if (isLoginSuccessful) {
-                System.out.println("Sign-in was successful!");
-            } else {
-                System.out.println("Sign-in failed.");
-            }
+            // Assertion to verify login success
+            Assert.assertTrue(isLoginSuccessful, "Sign-in was not successful.");
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            // Close the browser
-            driver.quit();
         }
     }
 }

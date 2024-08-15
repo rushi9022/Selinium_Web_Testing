@@ -1,0 +1,68 @@
+package testcase;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class firstTest {
+
+    public static void main(String[] args) {
+        // Set the path of the ChromeDriver executable
+
+    	WebDriverManager.chromedriver().setup();
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Open Zoho.com
+            driver.get("https://www.zoho.com");
+
+            // Click on the Sign in button
+            WebElement signInButton = driver.findElement(By.linkText("Sign in"));
+            signInButton.click();
+
+            // Wait for the sign-in page to load
+            Thread.sleep(2000);
+
+            // Enter email address or mobile number
+            WebElement emailField = driver.findElement(By.id("login_id"));
+            emailField.sendKeys("rushi.goggle@gmail.com");
+
+            // Click on the Next button
+            WebElement nextButton = driver.findElement(By.id("nextbtn"));
+            nextButton.click();
+
+            // Wait for the password field to load
+            Thread.sleep(2000);
+
+            // Enter password
+            WebElement passwordField = driver.findElement(By.id("password"));
+            passwordField.sendKeys("Pass@2524");
+
+            // Click on the Sign in button
+            WebElement submitButton = driver.findElement(By.id("nextbtn"));
+            submitButton.click();
+
+            // Wait for sign-in to complete
+            Thread.sleep(5000);
+
+            // Verify the sign-in by checking if a certain element is present after login
+            boolean isLoginSuccessful = driver.findElement(By.id("element-after-login")) != null;
+
+            if (isLoginSuccessful) {
+                System.out.println("Sign-in was successful!");
+            } else {
+                System.out.println("Sign-in failed.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+}

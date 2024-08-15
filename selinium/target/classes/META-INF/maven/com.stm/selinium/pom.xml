@@ -17,6 +17,15 @@
     <version>7.10.2</version>
     <scope>test</scope>
 </dependency>
+
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.7.0</version>
+        <scope>test</scope>
+    </dependency>
+
+
 <!-- https://mvnrepository.com/artifact/org.uncommons/reportng -->
 <dependency>
     <groupId>org.uncommons</groupId>
