@@ -1,6 +1,5 @@
 package base;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -16,19 +15,25 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected Properties prop;
+    protected Properties configProp;
+    protected Properties locatorsProp;
 
     @BeforeTest
     public void setup() {
-        prop = new Properties();
+        configProp = new Properties();
+        locatorsProp = new Properties();
 
         try {
             // Load properties from config file
-            FileInputStream fileInput = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\configfiles\\config.properties");
-            prop.load(fileInput);
+            FileInputStream configInput = new FileInputStream(System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\config.properties");
+            configProp.load(configInput);
 
-            // Get the browser from the properties file
-            String browser = prop.getProperty("browser");
+            // Load properties from locators file
+            FileInputStream locatorsInput = new FileInputStream(System.getProperty("user.dir") + "\\src\\test\\resources\\configfiles\\locators.properties");
+            locatorsProp.load(locatorsInput);
+
+            // Get the browser from the config properties file
+            String browser = configProp.getProperty("browser");
 
             // Set up WebDriver based on the browser specified in the config
             if (browser.equalsIgnoreCase("chrome")) {
@@ -44,7 +49,7 @@ public class BaseTest {
 
             // Maximize the browser window
             driver.manage().window().maximize();
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }

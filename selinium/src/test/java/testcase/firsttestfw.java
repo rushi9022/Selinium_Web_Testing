@@ -9,40 +9,39 @@ import base.BaseTest;
 
 public class firsttestfw extends BaseTest {
 
-	@Test
-	 
+    @Test
     public void testZohoSignIn() {
         try {
-            // Get the test URL from the properties file
-            String testUrl = prop.getProperty("testurl");
+            // Get the test URL from the config properties file
+            String testUrl = configProp.getProperty("testurl");
 
             // Open the specified URL
             driver.get(testUrl);
 
-            // Click on the Sign in button
-            WebElement signInButton = driver.findElement(By.linkText("Sign in"));
+            // Click on the Sign in button using locator from locators.properties
+            WebElement signInButton = driver.findElement(By.linkText(locatorsProp.getProperty("sign_in")));
             signInButton.click();
 
             // Wait for the sign-in page to load
             Thread.sleep(2000);
 
-            // Enter email address or mobile number
-            WebElement emailField = driver.findElement(By.id("login_id"));
+            // Enter email address or mobile number using locator from locators.properties
+            WebElement emailField = driver.findElement(By.id(locatorsProp.getProperty("email_id")));
             emailField.sendKeys("rushi.goggle@gmail.com");
 
-            // Click on the Next button
-            WebElement nextButton = driver.findElement(By.id("nextbtn"));
+            // Click on the Next button using locator from locators.properties
+            WebElement nextButton = driver.findElement(By.id(locatorsProp.getProperty("next_btn")));
             nextButton.click();
 
             // Wait for the password field to load
             Thread.sleep(2000);
 
-            // Enter password
-            WebElement passwordField = driver.findElement(By.id("password"));
+            // Enter password using locator from locators.properties
+            WebElement passwordField = driver.findElement(By.id(locatorsProp.getProperty("pwd")));
             passwordField.sendKeys("Pass@2524");
 
-            // Click on the Sign in button
-            WebElement submitButton = driver.findElement(By.id("nextbtn"));
+            // Click on the Sign in button using locator from locators.properties
+            WebElement submitButton = driver.findElement(By.id(locatorsProp.getProperty("login_nextbtn")));
             submitButton.click();
 
             // Wait for sign-in to complete
