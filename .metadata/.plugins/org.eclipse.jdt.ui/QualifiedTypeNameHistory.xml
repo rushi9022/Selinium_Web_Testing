@@ -5,4 +5,12 @@
     <fullyQualifiedTypeName name="org.testng.annotations.AfterTest"/>
     <fullyQualifiedTypeName name="base.BaseTest"/>
     <fullyQualifiedTypeName name="org.testng.annotations.Test"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.WorkbookFactory"/>
+    <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Workbook"/>
+    <fullyQualifiedTypeName name="org.apache.poi.sl.usermodel.Sheet"/>
+    <fullyQualifiedTypeName name="org.testng.annotations.DataProvider"/>
+    <fullyQualifiedTypeName name="utilities.ReadXLdata"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Method"/>
 </qualifiedTypeNameHistroy>
