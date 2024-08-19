@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Zoho Sign-In Test Suite">
-    <test name="Zoho Sign-In Test">
-        <classes>
-            <class name="testcase.firstTest"/>
-        </classes>
-    </test>
-</suite>
